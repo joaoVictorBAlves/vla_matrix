@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'oauth2_provider',
+    'rest_framework_simplejwt',
     'rest_framework.authtoken',  
     'api',
 ]
@@ -56,6 +57,16 @@ REST_FRAMEWORK = {
     ]
 }
 
+# Desabilitar CSRF para a API
+CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_COOKIE_HTTPONLY = True  # Desabilita cookies CSRF
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'https://localhost:8000',
+    # Se você tiver um domínio, adicione aqui
+]
+
+
 # URL para o sistema de autenticação
 OAUTH2_PROVIDER = {
     'ACCESS_TOKEN_EXPIRE_SECONDS': 36000,  # Exemplo: 10 horas
@@ -65,7 +76,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
